@@ -82,3 +82,6 @@ Incoming request from 1.2.3.4 on port 80:
 ➡ Traffic is allowed
 
 There is no concept of deny or priority here.
+
+***** Important
+Network ACLs do not filter traffic for certain AWS-managed services like DNS, DHCP, instance metadata, and time synchronization because these services are essential for basic EC2 and VPC functionality, so AWS allows this traffic by default even if NACL rules deny other traffic.
