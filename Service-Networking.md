@@ -4,7 +4,7 @@
   1. Stateless firewall
   2. Statefull firewall
  
-*****Stateless Firewall
+*** Stateless Firewall
 A stateless firewall filters network traffic only based on rules like source/destination IP address, port number, and protocol.
 It does not remember previous packets or track ongoing connections.
 It is used where simple and fast filtering is needed and traffic inspection is not complex.
