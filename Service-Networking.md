@@ -101,5 +101,21 @@ CLB routes traffic based on IP/port or simple HTTP rules, with health checks to 
 ##### Operation
 Clients connect to CLB's DNS, which balances loads using algorithms like round-robin; it supports SSL termination similar to ALB but without modern integrations like WAF or Lambda. Designed for EC2-Classic networks, it handles both connection-oriented TCP and request-oriented HTTP traffic.
 
-###### Application Load Balancing
+Application Load Balancers (ALB) and Network Load Balancers (NLB) differ primarily in the OSI layers they operate on and how they handle traffic termination. ALB functions at Layer 7 for HTTP/HTTPS, while NLB works at Layer 4 for TCP/UDP
+
+###### Application Load Balancing (Layer 7 Application Layer)
+![](https://github.com/Shravani512/AWS-Solutions-Architect-Associate-Certification/blob/104e433aa8f19c5ddaff46b15d147330f2894198/Images/Application_Load_Balancer.png)
+
+ALB terminates HTTP/HTTPS connections, decrypts traffic using certificates on the load balancer, and forwards unencrypted requests to targets, enabling content-based routing like path or host rules. ALB supports HTTP/HTTPS with SSL/TLS termination at the balancer, as shown in the image where certificates reside on ALB.
+Best for - Web apps, microservices 
+
+###### Network Load Balancing (Layer 4 Transport Layer)
+![]()
+NLB passes through encrypted TCP/UDP traffic without termination, keeping end-to-end encryption intact and preserving client source IPs for low-latency performance. NLB handles TCP/UDP/TLS passthrough, with certificates optionally on the balancer or targets, resulting in encrypted traffic to backends.
+Best For - High-performance, low-latency TCP/UDP
+
+Main Difference:
+The exact main difference is Layer 7 (ALB) vs. Layer 4 (NLB) operation: ALB inspects and routes based on application content after termination, whereas NLB forwards connections based on IP/port without inspecting higher-layer data
+ 
+
 
