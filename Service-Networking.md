@@ -182,7 +182,7 @@ VPN routing = rules that tell your VPN which traffic goes where.
 #### Direct Connect
 
 Architecture
-![]()
+![](https://github.com/Shravani512/AWS-Solutions-Architect-Associate-Certification/blob/d262a6b3b5cb90235137863c7d0c3b204e4d90e8/Images/direct_connect_architecture.png)
 AWS Direct Connect Architecture allows you to establish a dedicated, private network connection between your on-premises data center and AWS. Instead of using the public Internet, traffic flows through a high-speed, low-latency link, providing more consistent and secure connectivity. In a typical setup, your on-premises router connects to a Direct Connect location via a physical connection, which then links to one or more VPCs in AWS through Virtual Interfaces (VIFs). There are usually two types of VIFs: private VIF for accessing VPC resources and public VIF for accessing AWS public services like S3. Direct Connect can be combined with VPN as a backup to ensure high availability. Overall, this architecture improves performance, security, and reliability for hybrid cloud setups.
 
 #### VPC Peering
