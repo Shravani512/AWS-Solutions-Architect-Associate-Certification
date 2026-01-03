@@ -84,3 +84,7 @@ There is no concept of deny or priority here.
 ##### Important
 Network ACLs do not filter traffic for certain AWS-managed services like DNS, DHCP, instance metadata, and time synchronization because these services are essential for basic EC2 and VPC functionality, so AWS allows this traffic by default even if NACL rules deny other traffic.
 
+### Elastic Load Balancer
+
+Architecture
+[link text](https://github.com/Shravani512/AWS-Solutions-Architect-Associate-Certification/blob/56842feefc8d23e9b1497885c596e8eabd8af73b/Images/Elastic_Load_Balancer.png)
