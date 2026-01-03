@@ -110,7 +110,7 @@ ALB terminates HTTP/HTTPS connections, decrypts traffic using certificates on th
 Best for - Web apps, microservices 
 
 ###### Network Load Balancing (Layer 4 Transport Layer)
-![]()
+![](https://github.com/Shravani512/AWS-Solutions-Architect-Associate-Certification/blob/83d0745d3240469785c433b0d940c3abad86c3eb/Images/Network_Load_Balancer.png)
 NLB passes through encrypted TCP/UDP traffic without termination, keeping end-to-end encryption intact and preserving client source IPs for low-latency performance. NLB handles TCP/UDP/TLS passthrough, with certificates optionally on the balancer or targets, resulting in encrypted traffic to backends.
 Best For - High-performance, low-latency TCP/UDP
 
