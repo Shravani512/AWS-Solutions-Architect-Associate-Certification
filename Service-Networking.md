@@ -87,4 +87,4 @@ Network ACLs do not filter traffic for certain AWS-managed services like DNS, DH
 ### Elastic Load Balancer
 
 Architecture
-[!(https://github.com/Shravani512/AWS-Solutions-Architect-Associate-Certification/blob/56842feefc8d23e9b1497885c596e8eabd8af73b/Images/Elastic_Load_Balancer.png)]
+![](https://github.com/Shravani512/AWS-Solutions-Architect-Associate-Certification/blob/56842feefc8d23e9b1497885c596e8eabd8af73b/Images/Elastic_Load_Balancer.png)
