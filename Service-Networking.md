@@ -1,8 +1,8 @@
 - VPC
 - Elastic IP
-- Firewalls
-  1. Stateless firewall
-  2. Statefull firewall
+- Security Groups and NACLs
+  1. Stateless firewall(NACLs)
+  2. Statefull firewall(Security Groups)
  
 ##### Stateless Firewall
 A stateless firewall filters network traffic only based on rules like source/destination IP address, port number, and protocol.
@@ -83,3 +83,4 @@ There is no concept of deny or priority here.
 
 ##### Important
 Network ACLs do not filter traffic for certain AWS-managed services like DNS, DHCP, instance metadata, and time synchronization because these services are essential for basic EC2 and VPC functionality, so AWS allows this traffic by default even if NACL rules deny other traffic.
+
