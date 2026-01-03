@@ -138,3 +138,43 @@ Cross-Zone Load Balancing is achieved by enabling the cross-zone setting on the 
 
 ![](https://github.com/Shravani512/AWS-Solutions-Architect-Associate-Certification/blob/6f6f4402ae9fa7033735db61f9025c11c9fb447d/Images/cross_load_balancer.png)
 We create one load balancer in a VPC, and AWS automatically places its parts in each selected Availability Zone to handle traffic.
+
+##### ELB Architecture
+![](https://github.com/Shravani512/AWS-Solutions-Architect-Associate-Certification/blob/6133635d101dc7c1d08f20ef116e6cc1a28f68d6/Images/ELB_Architecture.png)
+This diagram illustrates a secure AWS VPC architecture using public and private subnets for ELB (Elastic Load Balancer). Internet users send requests to the ELB placed in public subnets, which have internet access via an Internet Gateway for inbound traffic. ELB then forwards these requests internally to application resources like EC2 instances secured in private subnets across Availability Zones. Private subnets lack direct internet access, enhancing security by isolating backend servers from public exposure. VPC routing tables handle intra-VPC traffic between public and private subnets without leaving AWS infrastructure. This multi-AZ setup ensures high availability, as ELB distributes loads across zones if one fails.
+​Overall, it balances accessibility (public ELB) with protection (private backends), a standard pattern for web apps. Private resources use NAT gateways for outbound internet needs like updates.
+
+##### Listeners and Target groups
+
+Listener
+Listens for incoming traffic on a specific port and protocol (like HTTP 80 or HTTPS 443)
+Decides what to do with the request
+
+Target Group
+A group of backend servers (EC2, pods, IPs, Lambda)
+Receives traffic from the load balancer
+
+### VPC (Virtual Private Network)
+
+VPN (Virtual Private Network) is a technology that creates a secure, encrypted connection over a public network (like the internet), allowing users or networks to access private resources safely as if they were on the same private network.
+
+A VPN allows remote users to securely access a private subnet by creating an encrypted tunnel between the user’s device and the VPC. Since private subnets cannot be accessed directly from the internet, the user first connects to a VPN endpoint. This VPN endpoint is attached to the VPC and associated with subnets that have routing to the private subnet. Once connected, the VPN assigns the user a private IP address, making the user appear as if they are inside the VPC network. The VPC route tables and security groups then allow traffic from the VPN to reach resources in the private subnet securely.
+
+Example: AWS Client VPN
+VPN Architecture
+![]()
+
+```
+On-prem / User
+   ↓
+Customer Gateway
+   ↓  (VPN tunnel)
+VPN Gateway (AWS)
+   ↓
+VPC Subnet
+```
+
+Types of VPN routing
+VPN routing = rules that tell your VPN which traffic goes where.
+- Static routing = manual, fixed routes
+- Dynamic routing = automatic, learns routes via BGP
