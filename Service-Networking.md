@@ -136,5 +136,5 @@ User request enters AZ-1
 Cross-Zone Load Balancing is achieved by enabling the cross-zone setting on the load balancer, which allows the load balancer to distribute traffic to healthy targets across all Availability Zones.
   which results Even traffic distribution, Better performance, Higher availability
 
-![]()
+![](https://github.com/Shravani512/AWS-Solutions-Architect-Associate-Certification/blob/6f6f4402ae9fa7033735db61f9025c11c9fb447d/Images/cross_load_balancer.png)
 We create one load balancer in a VPC, and AWS automatically places its parts in each selected Availability Zone to handle traffic.
