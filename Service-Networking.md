@@ -89,6 +89,12 @@ Network ACLs do not filter traffic for certain AWS-managed services like DNS, DH
 Elastic Load Balancer Architecture
 ![](https://github.com/Shravani512/AWS-Solutions-Architect-Associate-Certification/blob/56842feefc8d23e9b1497885c596e8eabd8af73b/Images/Elastic_Load_Balancer.png)
 
+- Users send requests to the ELB DNS name(DNS record is created for ELB) (not directly to servers)
+- ELB keeps a list of healthy backend servers (EC2, containers, IPs)
+- ELB runs health checks
+- ELB forwards each new request to a healthy server using a load-balancing algorithm
+- If a server becomes unhealthy, ELB stops sending traffic to it
+
 ##### Types of Load Balancing
 - Classical Load Balancing
 - Application Load Balancing
@@ -116,6 +122,19 @@ Best For - High-performance, low-latency TCP/UDP
 
 Main Difference:
 The exact main difference is Layer 7 (ALB) vs. Layer 4 (NLB) operation: ALB inspects and routes based on application content after termination, whereas NLB forwards connections based on IP/port without inspecting higher-layer data
- 
 
+##### Cross Zone Load Balancing
+Cross-Zone Load Balancing means the load balancer distributes traffic evenly across all healthy instances in all Availability Zones, not just within the Availablity zone where the request was received.
+without Cross Zone Load Balancing
+User request enters AZ-1
+- Traffic is sent only to instances in AZ-1
+- Instances in AZ-2 may stay idle
+  
+  And the result is One AZ overloaded Other AZ under-used
+  with cross zone load balancing User request enters AZ-1 Load balancer spreads traffic across instances in AZ-1 and AZ-2
 
+Cross-Zone Load Balancing is achieved by enabling the cross-zone setting on the load balancer, which allows the load balancer to distribute traffic to healthy targets across all Availability Zones.
+  which results Even traffic distribution, Better performance, Higher availability
+
+![]()
+We create one load balancer in a VPC, and AWS automatically places its parts in each selected Availability Zone to handle traffic.
