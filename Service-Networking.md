@@ -123,6 +123,20 @@ Best For - High-performance, low-latency TCP/UDP
 Main Difference:
 The exact main difference is Layer 7 (ALB) vs. Layer 4 (NLB) operation: ALB inspects and routes based on application content after termination, whereas NLB forwards connections based on IP/port without inspecting higher-layer data
 
+In real systems, ALB is used for web applications where routing depends on request content, while NLB is used for high-performance TCP/UDP workloads where latency is critical.
+example-
+ALB: ALB reads the HTTP request (URL path) and routes it to the correct backend service based on what the user is requesting.
+NLB: NLB forwards TCP/UDP traffic directly to backend servers without inspecting it, ensuring ultra-low latency and high-speed connections.  
+
+```
+Situation	Use
+Website / API / Microservices	ALB
+URL-based routing needed	ALB
+Game / Chat / DB / Streaming	NLB
+Ultra-low latency needed	NLB
+Non-HTTP protocols	NLB
+```
+
 ##### Cross Zone Load Balancing
 Cross-Zone Load Balancing means the load balancer distributes traffic evenly across all healthy instances in all Availability Zones, not just within the Availablity zone where the request was received.
 without Cross Zone Load Balancing
