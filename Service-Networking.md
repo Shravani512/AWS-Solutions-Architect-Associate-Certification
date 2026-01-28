@@ -374,8 +374,8 @@ Where Global Accelerator is used
 ```
 How to choose (easy decision rule)
 Scenario	                    Use
-Static content	              CloudFront
-Dynamic global traffic	      Global Accelerator
+Static content	               CloudFront
+Dynamic global traffic	       Global Accelerator
 Regional app	                ALB / Route 53
 Need caching	                CloudFront
 Need fast routing	            Global Accelerator
