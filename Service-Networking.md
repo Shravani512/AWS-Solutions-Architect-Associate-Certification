@@ -389,7 +389,7 @@ Route 53 Application Recovery Controller helps monitor, control, and safely fail
 
 ARC monitors, controls, and tests your application’s recovery readiness using three main features:
 
-1. - Readiness Checks
+1.   Readiness Checks - 
      Checks if your application is ready to fail over
      Verifies things like:
      Are load balancers configured?
@@ -397,7 +397,7 @@ ARC monitors, controls, and tests your application’s recovery readiness using 
      Are Route 53 records correct?
 👉 Tells you before a failure whether recovery will work.
 
-2. - Routing Controls
+2.   Routing Controls - 
      Lets you manually or automatically shift traffic
      Example:
          Stop traffic to Region A
@@ -405,7 +405,7 @@ ARC monitors, controls, and tests your application’s recovery readiness using 
      Used during real incidents
 👉 Acts like an emergency traffic switch
 
-3. - Safety Rules
+3.   Safety Rules - 
      Prevents dangerous actions
      Ensures:
          You don’t accidentally send traffic to a broken region
