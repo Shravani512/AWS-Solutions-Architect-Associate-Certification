@@ -380,3 +380,39 @@ Regional app	                ALB / Route 53
 Need caching	                CloudFront
 Need fast routing	            Global Accelerator
 ```
+
+### Route 53
+Amazon Route 53 is AWS’s DNS service, which helps users reach your application using a human-friendly name instead of an IP address. When someone types a website name like example.com, Route 53 finds where that application is hosted and sends the user there. It works like a phonebook of the internet, translating names into IP addresses. Route 53 is highly available, fast, and reliable because it runs on AWS’s global infrastructure. It can route users to different servers based on rules like location, health, or latency. Route 53 also checks if your application is healthy and avoids sending traffic to broken servers. It supports domain registration, DNS management, and traffic routing in one place. You can use it with EC2, Load Balancers, CloudFront, or Global Accelerator. It helps improve availability and performance of applications. In short, Route 53 makes sure users reach the right AWS resource safely and quickly.
+
+### Route 53 Application Recovery Controller (ARC)
+Route 53 Application Recovery Controller helps monitor, control, and safely fail over traffic for highly available, multi-region AWS applications.
+
+ARC monitors, controls, and tests your application’s recovery readiness using three main features:
+
+1. - Readiness Checks
+     Checks if your application is ready to fail over
+     Verifies things like:
+     Are load balancers configured?
+     Are autoscaling groups healthy?
+     Are Route 53 records correct?
+👉 Tells you before a failure whether recovery will work.
+
+2. - Routing Controls
+     Lets you manually or automatically shift traffic
+     Example:
+         Stop traffic to Region A
+         Send traffic to Region B
+     Used during real incidents
+👉 Acts like an emergency traffic switch
+
+3. - Safety Rules
+     Prevents dangerous actions
+     Ensures:
+         You don’t accidentally send traffic to a broken region
+         At least one healthy environment stays online
+👉 Protects against human mistakes during outages
+
+Where it is used
+Critical production systems
+Multi-region architectures
+Banking, payments, healthcare, large SaaS apps
