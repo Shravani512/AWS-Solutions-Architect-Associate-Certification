@@ -334,3 +334,49 @@ Origin Request / Origin Response → runs only when content is fetched from orig
 You can modify requests and responses at the edge without touching your origin server.
 You can customize cached content for users globally.
 Reduces latency → faster user experience.
+
+### Global Accelerator
+AWS Global Accelerator is a service that makes your application faster and more reliable for users around the world. It routes user traffic to the nearest AWS edge location instead of sending it through the slow public internet. From there, the traffic travels on the AWS private backbone network, which is faster and more stable. This reduces latency, packet loss, and connection issues. Global Accelerator is mainly used for global applications that need consistent performance for all users.
+
+##### AWS private backbone network
+AWS private backbone is AWS’s own global network made of private fiber-optic cables that connect AWS regions, edge locations, and data centers worldwide.
+This network is not the public internet and is fully owned, controlled, and optimized by AWS.
+What “private” actually means here
+###### It does NOT mean:
+Private IPs only
+VPN only
+Hidden from everyone
+###### It DOES mean:
+AWS owns the cables
+AWS controls routing
+No ISP guessing or congestion
+Predictable speed and latency
+
+How it works (simple flow)
+User request reaches nearest AWS edge location(still public internet)
+Traffic enters the AWS private backbone
+Request travels securely and quickly to the AWS region
+Response comes back the same optimized way
+
+#### User → Nearby Edge Location → AWS Private Backbone → Server (Region)
+
+Global Accelerator is not useed everywhere, even though it’s fast because-
+- It costs extra Global Accelerator is a paid service Charges for: Accelerator hours Data transfer and Not worth it for small or regional apps
+- Not needed for cached/static content as CloudFront already solves this CloudFront: Caches content at edge and Reduces origin traffic Global Accelerator does NOT cache Using GA for static files = waste of money
+- Regional users don’t need it If users are mostly in one region Normal ALB + Route 53 is enough Latency gain is minimal
+
+Where Global Accelerator is used
+- Global applications with users worldwide
+- Latency-sensitive apps Gaming, Live streaming, Trading platforms, Real-time APIs
+- Multi-region active-active architectures Applications needing fast failover
+- When availability and reliability matter more than cost
+
+```
+How to choose (easy decision rule)
+Scenario	                    Use
+Static content	              CloudFront
+Dynamic global traffic	      Global Accelerator
+Regional app	                ALB / Route 53
+Need caching	                CloudFront
+Need fast routing	            Global Accelerator
+```
