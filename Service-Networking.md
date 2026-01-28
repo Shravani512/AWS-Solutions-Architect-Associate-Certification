@@ -193,13 +193,13 @@ VPN routing = rules that tell your VPN which traffic goes where.
 - Static routing = manual, fixed routes
 - Dynamic routing = automatic, learns routes via BGP
 
-#### Direct Connect
+### Direct Connect
 
 Architecture
 ![](https://github.com/Shravani512/AWS-Solutions-Architect-Associate-Certification/blob/d262a6b3b5cb90235137863c7d0c3b204e4d90e8/Images/direct_connect_architecture.png)
 AWS Direct Connect Architecture allows you to establish a dedicated, private network connection between your on-premises data center and AWS. Instead of using the public Internet, traffic flows through a high-speed, low-latency link, providing more consistent and secure connectivity. In a typical setup, your on-premises router connects to a Direct Connect location via a physical connection, which then links to one or more VPCs in AWS through Virtual Interfaces (VIFs). There are usually two types of VIFs: private VIF for accessing VPC resources and public VIF for accessing AWS public services like S3. Direct Connect can be combined with VPN as a backup to ensure high availability. Overall, this architecture improves performance, security, and reliability for hybrid cloud setups.
 
-#### VPC Peering
+### VPC Peering
 Earlier, if you had two different VPCs, you could not connect their subnets directly. Each VPC was isolated, so resources in one VPC (like EC2 instances or databases) couldn’t talk to resources in another VPC.
 
 That’s where VPC Peering came into the picture. It creates a private connection between two VPCs, allowing their subnets to communicate with each other using private IPs, without going over the Internet. Now, instances in one VPC can access instances or services in another VPC securely and directly.
@@ -213,12 +213,12 @@ That’s where VPC Peering came into the picture. It creates a private connectio
 - Works across different AWS accounts as well.
 - Security Groups & NACLs must allow traffic explicitly.
 
-#### Transit Gateway
+### Transit Gateway
 AWS Transit Gateway is a managed, centralized routing service that acts as a hub to connect multiple VPCs and on-premises networks, enabling transitive communication between them.
 Instead of creating many one-to-one VPC peering connections, each VPC connects once to the Transit Gateway, and the gateway handles all routing between VPCs and external networks.
 Transit Gateways can peer with other Transit Gateways example- Enables: Inter-region connectivity and Cross-account networking
 
-###### What Transit Gateway Does Internally
+#### What Transit Gateway Does Internally
 
 Acts like a cloud router
 All attached networks send traffic to the same gateway
@@ -231,7 +231,7 @@ You must select one subnet per Availability Zone
 These subnets host TGW network interfaces
 Traffic from VPC → TGW → destination VPC
 
-##### Private Link
+### Private Link
 AWS PrivateLink is a way to access AWS services or services running in another VPC privately and securely from your own VPC. When you use PrivateLink, your data never goes to the public internet; it stays inside AWS’s private network. You don’t need an Internet Gateway, NAT Gateway, or public IPs, which makes your setup much safer. PrivateLink creates a private endpoint inside your VPC, and through this endpoint, you can reach only the specific service you need. From your side, it feels like that service is sitting inside your own VPC, even though it is actually hosted elsewhere.
 
 Normal (Without PrivateLink)
@@ -259,7 +259,7 @@ AWS internally routes it inside their private backbone
 
 If traffic never leaves AWS’s private network, there is nothing on the internet that can see or attack it.
 
-##### CloudFront
+### CloudFront
 Amazon CloudFront is a service that makes websites and applications load faster for users all over the world. It works by storing copies of your content (like images, videos, HTML, CSS, and JavaScript) at edge locations that are close to users. When someone requests your site, CloudFront delivers the content from the nearest edge location instead of a faraway server, which reduces delay. The original source of the content is called the origin, such as an S3 bucket or a web server. CloudFront uses a distribution that gives you a special domain name to access this cached content. Cached data stays at edge locations for a defined time called TTL. If content changes before TTL expires, you can force an update using cache invalidation. CloudFront supports HTTPS by default for secure delivery. It also sends performance metrics to CloudWatch for monitoring. Overall, CloudFront improves speed, performance, and user experience globally.
 
 What CloudFront Actually Stores
@@ -270,7 +270,7 @@ Query strings / headers (if configured)
 
 CloudFront does NOT check file content or timestamps at origin by default.
 
-###### Catche Invalidation (cost applied)
+#### Catche Invalidation (cost applied)
 
 Case 1️⃣ — Without Invalidation (Only TTL)
 You update /index.html in S3
@@ -292,7 +292,7 @@ CloudFront fetches the file again from origin
 New version is cached and served
 👉 Old cache is gone only because YOU deleted it
 
-###### Object Versioning (Free)
+#### Object Versioning (Free)
 Change the Object Version (File Versioning)
 Changing object version means changing the file name itself whenever content changes.
 How it works:
@@ -307,3 +307,30 @@ image.png → image_v2.png
 📌 Best practice in real production
 
 Invalidation deletes old cache for the same URL, versioning changes the URL so cache automatically misses and updates.
+
+### Lambda@Egde
+Lambda@Edge is an AWS service that lets you run serverless code at CloudFront edge locations to customize and process requests and responses closer to users, reducing latency(faster response) and improving performance.
+
+#### CloudFront receives a request from a user
+
+The request goes to the nearest edge location.
+CloudFront first checks its cache for the requested URL.
+Lambda@Edge can trigger BEFORE cache is used (depending on event)
+CloudFront supports 4 types of Lambda@Edge triggers:
+
+#### Event	When it runs	Purpose-
+Viewer Request	runs When request arrives at edge purpose is to	Modify request, authentication, URL rewrite
+Origin Request	runs When content is not cached and CloudFront goes to origin	purpose is to Add headers, customize origin request
+Origin Response	runs When CloudFront gets content from origin	purpose is to Modify response before caching or sending to viewer
+Viewer Response	runs when Before sending cached or origin content to viewer	purpose is to Add headers, tracking, personalization
+
+#### Integration with caching (TTL)
+CloudFront serves cached content if TTL not expired.
+Lambda@Edge can run even for cached content depending on trigger:
+Viewer Request / Viewer Response → runs every time user requests content at edge, even if cached.
+Origin Request / Origin Response → runs only when content is fetched from origin.
+
+#### Why this is powerful
+You can modify requests and responses at the edge without touching your origin server.
+You can customize cached content for users globally.
+Reduces latency → faster user experience.
