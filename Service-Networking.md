@@ -203,3 +203,107 @@ AWS Direct Connect Architecture allows you to establish a dedicated, private net
 Earlier, if you had two different VPCs, you could not connect their subnets directly. Each VPC was isolated, so resources in one VPC (like EC2 instances or databases) couldn’t talk to resources in another VPC.
 
 That’s where VPC Peering came into the picture. It creates a private connection between two VPCs, allowing their subnets to communicate with each other using private IPs, without going over the Internet. Now, instances in one VPC can access instances or services in another VPC securely and directly.
+
+- VPC Peering allows private communication between two VPCs using AWS private network (no internet, no VPN).
+- Can be done within the same region or across different regions (inter-region peering).
+- VPCs must have non-overlapping CIDR blocks.
+- Traffic is encrypted by default and stays inside AWS backbone.
+- You must manually update route tables in both VPCs to enable traffic flow.
+- No transitive peering → VPC A ↔ VPC B and VPC B ↔ VPC C does NOT allow A ↔ C.
+- Works across different AWS accounts as well.
+- Security Groups & NACLs must allow traffic explicitly.
+
+#### Transit Gateway
+AWS Transit Gateway is a managed, centralized routing service that acts as a hub to connect multiple VPCs and on-premises networks, enabling transitive communication between them.
+Instead of creating many one-to-one VPC peering connections, each VPC connects once to the Transit Gateway, and the gateway handles all routing between VPCs and external networks.
+Transit Gateways can peer with other Transit Gateways example- Enables: Inter-region connectivity and Cross-account networking
+
+###### What Transit Gateway Does Internally
+
+Acts like a cloud router
+All attached networks send traffic to the same gateway
+The gateway decides where to forward traffic
+Supports transitive routing automatically
+Each VPC attaches to the Transit Gateway
+
+For attachment:
+You must select one subnet per Availability Zone
+These subnets host TGW network interfaces
+Traffic from VPC → TGW → destination VPC
+
+##### Private Link
+AWS PrivateLink is a way to access AWS services or services running in another VPC privately and securely from your own VPC. When you use PrivateLink, your data never goes to the public internet; it stays inside AWS’s private network. You don’t need an Internet Gateway, NAT Gateway, or public IPs, which makes your setup much safer. PrivateLink creates a private endpoint inside your VPC, and through this endpoint, you can reach only the specific service you need. From your side, it feels like that service is sitting inside your own VPC, even though it is actually hosted elsewhere.
+
+Normal (Without PrivateLink)
+
+Your EC2 is in a private subnet
+It wants to access S3 / external service
+To go outside the VPC, traffic must:
+Go to NAT Gateway (outbound)
+Or Internet Gateway (public subnet)
+
+This means:
+Your VPC is connected to the internet
+Even if restricted, exposure exists
+
+With AWS PrivateLink
+AWS creates a VPC Endpoint (ENI) inside your VPC
+This endpoint has a private IP
+Your EC2 sends traffic to:
+10.x.x.x (private IP)
+Traffic:
+❌ Never goes to Internet Gateway
+❌ Never goes to NAT Gateway
+❌ Never uses public IPs
+AWS internally routes it inside their private backbone
+
+If traffic never leaves AWS’s private network, there is nothing on the internet that can see or attack it.
+
+##### CloudFront
+Amazon CloudFront is a service that makes websites and applications load faster for users all over the world. It works by storing copies of your content (like images, videos, HTML, CSS, and JavaScript) at edge locations that are close to users. When someone requests your site, CloudFront delivers the content from the nearest edge location instead of a faraway server, which reduces delay. The original source of the content is called the origin, such as an S3 bucket or a web server. CloudFront uses a distribution that gives you a special domain name to access this cached content. Cached data stays at edge locations for a defined time called TTL. If content changes before TTL expires, you can force an update using cache invalidation. CloudFront supports HTTPS by default for secure delivery. It also sends performance metrics to CloudWatch for monitoring. Overall, CloudFront improves speed, performance, and user experience globally.
+
+What CloudFront Actually Stores
+
+CloudFront caches objects, identified by:
+URL / file name (e.g. /index.html)
+Query strings / headers (if configured)
+
+CloudFront does NOT check file content or timestamps at origin by default.
+
+###### Catche Invalidation (cost applied)
+
+Case 1️⃣ — Without Invalidation (Only TTL)
+You update /index.html in S3
+CloudFront still has /index.html cached
+User requests /index.html
+CloudFront says:
+“TTL not expired → serve cached copy”
+Old content is served, even though origin changed
+📌 CloudFront never asks the origin until TTL expires.
+
+Case 2️⃣ — With Cache Invalidation
+You update /index.html in S3
+You send Invalidate /index.html request to CloudFront
+CloudFront deletes the cached object from all edge locations
+Next user request comes
+CloudFront says:
+“Cache miss — I don’t have this file”
+CloudFront fetches the file again from origin
+New version is cached and served
+👉 Old cache is gone only because YOU deleted it
+
+###### Object Versioning (Free)
+Change the Object Version (File Versioning)
+Changing object version means changing the file name itself whenever content changes.
+How it works:
+Old file: app.js
+New file: app.v2.js
+CloudFront sees this as a brand-new file
+No old cache exists → fresh content served immediately
+Example:
+style.css → style.2026.css
+image.png → image_v2.png
+📌 Good for: regular updates, large apps, static assets
+📌 Best practice in real production
+
+Invalidation deletes old cache for the same URL, versioning changes the URL so cache automatically misses and updates.
