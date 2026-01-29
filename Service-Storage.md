@@ -76,6 +76,8 @@ You only click Create Snapshot → Copy Snapshot → Create Volume
 
 * **AWS EBS Volume types**
 
+EBS volumes are mainly SSD for performance (gp, io) and HDD for low-cost storage (st, sc), chosen based on speed and budget needs.
+
 ```
 
 | Volume Type                      | Storage Type | Best For                                     | Speed / Performance                 | Cost       | Simple Interview Line                                  |
@@ -90,7 +92,5 @@ gp → General apps
 io → Intensive performance
 st → Storage heavy workloads
 sc → Super cheap archive
-
-EBS volumes are mainly SSD for performance (gp, io) and HDD for low-cost storage (st, sc), chosen based on speed and budget needs.
 
 ```
