@@ -94,3 +94,8 @@ st → Storage heavy workloads
 sc → Super cheap archive
 
 ```
+
+```diff
++ This whole line will be green
+- This whole line will be red
+! This whole line will be orange
