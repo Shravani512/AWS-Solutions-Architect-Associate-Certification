@@ -143,11 +143,6 @@ Only for Linux (Windows not supported)
 Data is automatically scalable — no need to increase size manually
 Fully managed by AWS (no server maintenance)
 
-* **Storage Classess**
-
-1. Standard Storage (Multi-AZ) - Data stored in multiple AZs very safe and durable it is Slightly more expensive
-2. One Zone Storage - Data stored in single AZ it is Cheaper Less safe if AZ fails
-
 * **Performance Modes(Speed control)**
 
 1. General Purpose - Best for websites, CMS, normal apps it has Low latency, fast response
@@ -173,8 +168,8 @@ It is different from EFS because FSx supports both Windows and Linux environment
 
 ```
 
-| FSx Type                      | Best For                   | Supported OS          | Protocols       | Key Features                                           | Example Use Case                                     |
-| ------------------------------- | -------------------------- | --------------------- | --------------- | ------------------------------------------------------ | ---------------------------------------------------|
+| FSx Type                    | Best For                   | Supported OS          | Protocols       | Key Features                                           | Example Use Case                                     |
+| ----------------------------| -------------------------- | --------------------- | --------------- | ------------------------------------------------------ | ---------------------------------------------------|
 | FSx for Windows File Server | Windows Applications       | Windows               | SMB             | Active Directory integration, quotas, deduplication    | Company shared drive, .NET apps, Windows file server |
 | FSx for Lustre              | High-Performance Computing | Linux                 | Lustre          | Very low latency, very high throughput, S3 integration | Machine Learning, Big Data, Scientific research      |
 | FSx for NetApp ONTAP        | Enterprise Storage         | Windows, Linux, macOS | NFS, SMB, iSCSI | Snapshots, cloning, replication, scalable              | Large corporate storage, ERP systems                 |
@@ -248,3 +243,31 @@ This link is the public URL of an S3 bucket or file. AWS automatically creates t
 | Buckets per Account | 100 (can increase to 1000) |
 
 ```
+
+## S3 Storage Classes
+
+S3 Storage Classes are different cost and performance options in Amazon S3. We choose a storage class based on how frequently we access data, how fast we need it, and how much we want to spend.
+
+```
+
+| Storage Class        | Access Speed  | Cost     | Availability Zones | Best Use Case             | Important Notes               |
+| ---------------------| ------------- | -------- | ------------------ | ------------------------- | ----------------------------- |
+| S3 Standard          | Milliseconds  | High     | Multi-AZ           | Active websites, apps     | 11 nines durability           |
+| S3 Standard-IA       | Milliseconds  | Medium   | Multi-AZ           | Backups, infrequent files | Retrieval fee, 30-day minimum |
+| S3 One Zone-IA       | Milliseconds  | Low      | Single AZ          | Re-creatable data         | Risk of AZ failure            |
+| Glacier Instant      | Milliseconds  | Low      | Multi-AZ           | Rare access but need fast | 90-day minimum                |
+| Glacier Flexible     | Minutes–Hours | Very Low | Multi-AZ           | Archives, old logs        | Retrieval delay               |
+| Glacier Deep Archive | 12–48 Hours   | Cheapest | Multi-AZ           | Compliance, legal data    | 180-day minimum               |
+| Intelligent-Tiering  | Auto          | Varies   | Multi-AZ           | Unknown usage pattern     | Small monitoring fee          |
+
+Need instant access & frequent use → S3 Standard
+Instant but rare use → Standard-IA
+Cheapest but can risk single AZ → One Zone-IA
+Archive with fast retrieval → Glacier Instant
+Archive with delay acceptable → Glacier Flexible
+Very old data, cheapest → Glacier Deep Archive
+Don’t know usage pattern → Intelligent-Tiering
+
+S3 Storage Classes help balance cost, speed, and durability — Standard for active data, IA for less frequent access, Glacier for archives, and Intelligent-Tiering when access pattern is unknown.
+
+![]()
