@@ -272,3 +272,61 @@ S3 Storage Classes help balance cost, speed, and durability — Standard for act
 
 ```
 ![](https://github.com/Shravani512/AWS-Solutions-Architect-Associate-Certification/blob/ea726d23e940a87da044013a2b976491f56925a4/Images/Storage_classes.png)
+
+## S3 Versioning
+
+S3 Versioning is a feature in Amazon S3 that keeps multiple versions of the same file so that data is not lost due to accidental delete or overwrite.
+
+* **Why We Need Versioning**
+
+Normally in S3 (versioning OFF):
+If you delete a file → it is permanently gone
+If you upload same file name again → old file is overwritten
+
+With Versioning ON:
+Old files are not deleted
+New upload creates new version
+You can restore old data anytime
+
+* **Bucket States**
+
+1. Unversioned (Default)
+Versioning is OFF
+Delete = permanent loss
+
+2. Versioning Enabled
+Every file gets a unique Version ID
+Old versions are preserved
+
+3. Versioning Suspended
+Old versions stay safe
+New files behave like normal (Version ID = null)
+
+Enabled: Every edit creates new history.
+Suspended: History stays, but new edits stop saving history and just replace the current file.
+
+Important: Once enabled, you cannot disable, only suspend.
+
+* **Delete behaviour with versioning**
+
+1. Normal Delete (No Version ID)
+S3 does not actually remove the file; it adds a Delete Marker which only hides the latest version.
+All previous versions remain stored and the file can be restored by removing the delete marker.
+
+2. Delete Specific Version
+Only the selected version is permanently deleted from the bucket.
+Other versions of the same file remain safe and still accessible.
+
+* **Pricing Impact**
+
+You pay for all versions stored.
+Example:
+Version 1 = 10GB
+Version 2 = 15GB
+Billing = 25GB
+So cleaning old versions is important.
+
+* **MFA Delete (Extra Security)**
+
+MFA Delete is an extra security feature in S3 Versioning that requires a one-time password (OTP) before deleting object versions or changing versioning settings.
+It protects data from accidental or unauthorized deletion and can only be enabled using the AWS CLI, not the console.
