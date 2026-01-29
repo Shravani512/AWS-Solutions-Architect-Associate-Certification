@@ -87,4 +87,5 @@ You only click Create Snapshot → Copy Snapshot → Create Volume
 | Magnetic (Old Type)              | HDD          | Legacy systems only                          | Very Slow                           | Low        | Old generation, rarely used now.                       |
 
 
+
 ```
