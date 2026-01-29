@@ -80,10 +80,10 @@ You only click Create Snapshot → Copy Snapshot → Create Volume
 
 | Volume Type                          | Storage Type | Best For                                     | Speed / Performance                 | Cost       | Simple Interview Line                                    |
 | ------------------------------------ | ------------ | -------------------------------------------- | ----------------------------------- | ---------- | -------------------------------------------------------- |
-| **gp3 / gp2 (General Purpose SSD)**  | SSD          | Most applications, websites, small-medium DB | Balanced speed                      | Medium     | *Default EBS. Good performance + good price.*            |
-| **io1 / io2 (Provisioned IOPS SSD)** | SSD          | High-performance DB, banking, critical apps  | Very High Speed & IOPS              | High       | *Used when application needs very fast disk operations.* |
-| **st1 (Throughput Optimized HDD)**   | HDD          | Big data, log processing, large files        | High throughput but slower than SSD | Low-Medium | *For large data where speed is not ultra-critical.*      |
-| **sc1 (Cold HDD)**                   | HDD          | Backup, archive, rarely used data            | Slow                                | Very Low   | *Cheapest option for infrequent access.*                 |
-| **Magnetic (Old Type)**              | HDD          | Legacy systems only                          | Very Slow                           | Low        | *Old generation, rarely used now.*                       |
+| gp3 / gp2 (General Purpose SSD)  | SSD          | Most applications, websites, small-medium DB | Balanced speed                      | Medium     | Default EBS. Good performance + good price.            |
+| io1 / io2 (Provisioned IOPS SSD) | SSD          | High-performance DB, banking, critical apps  | Very High Speed & IOPS              | High       | Used when application needs very fast disk operations. |
+| st1 (Throughput Optimized HDD)   | HDD          | Big data, log processing, large files        | High throughput but slower than SSD | Low-Medium | For large data where speed is not ultra-critical.      |
+| sc1 (Cold HDD)                   | HDD          | Backup, archive, rarely used data            | Slow                                | Very Low   | Cheapest option for infrequent access.                 |
+| Magnetic (Old Type)              | HDD          | Legacy systems only                          | Very Slow                           | Low        | Old generation, rarely used now.                       |
 
 ```
