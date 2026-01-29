@@ -11,7 +11,7 @@ You don’t see blocks.
 You just see C Drive / D Drive.
 Same in AWS — EC2 sees one disk, but AWS internally manages blocks.
 
-* **Amazon EBS**
+2. **Amazon EBS**
 
 Amazon EBS = Virtual Hard Disk for EC2
 You create a disk (20GB, 50GB, 100GB etc.)
@@ -23,7 +23,7 @@ So EBS = Cloud Hard Disk.
 
 Stop EC2, Detach EBS, Attach to another EC2, Data stays safe. This is huge benefit because: Instance can die and Data still safe in EBS
 
-* **Multiple attach**
+3. **Multiple attach**
 
 Normally:
 1 EBS → 1 EC2
@@ -33,7 +33,7 @@ But some volume types allow:
 Warning:
 If two servers write same file → corruption possible. So apps must handle it carefully.
 
-* **Availability Zone**
+4. **Availability Zone**
 
 EBS exists in one AZ only.
 Example: EC2 in ap-south-1a and EBS must also be ap-south-1a
@@ -43,7 +43,7 @@ Important: Device failure → safe
             Entire AZ failure → data lost
             So we use Snapshots.
 
-* **Snapshot Backup**
+5. **Snapshot Backup**
 
 Snapshot = Photo of Disk Stored in S3.
 Use cases: To Move data to another AZ
@@ -55,7 +55,7 @@ You copy snapshot to another Region (S3 makes this easy)
 You create new EBS from snapshot
 Attach to EC2
 
-* **Cross region copy**
+6. **Cross region copy**
 
 To migrate EBS data across regions, we create a snapshot, copy it to the target region, and then create a new EBS volume from that snapshot and attach it to an EC2 instance
 
@@ -74,7 +74,7 @@ Attach this new EBS to EC2 in US
 You do not manually open S3, You do not upload/download files Everything is handled by AWS internally
 You only click Create Snapshot → Copy Snapshot → Create Volume
 
-* **AWS EBS Volume types**
+7. **AWS EBS Volume types**
 
 EBS volumes are mainly SSD for performance (gp, io) and HDD for low-cost storage (st, sc), chosen based on speed and budget needs.
 
@@ -94,3 +94,4 @@ st → Storage heavy workloads
 sc → Super cheap archive
 
 ```
+## Instance Store
