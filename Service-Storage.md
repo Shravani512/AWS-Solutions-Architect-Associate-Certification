@@ -86,6 +86,11 @@ You only click Create Snapshot → Copy Snapshot → Create Volume
 | sc1 (Cold HDD)                   | HDD          | Backup, archive, rarely used data            | Slow                                | Very Low   | Cheapest option for infrequent access.                 |
 | Magnetic (Old Type)              | HDD          | Legacy systems only                          | Very Slow                           | Low        | Old generation, rarely used now.                       |
 
+gp → General apps
+io → Intensive performance
+st → Storage heavy workloads
+sc → Super cheap archive
 
+EBS volumes are mainly SSD for performance (gp, io) and HDD for low-cost storage (st, sc), chosen based on speed and budget needs.
 
 ```
