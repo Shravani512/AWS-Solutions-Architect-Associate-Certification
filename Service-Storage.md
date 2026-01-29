@@ -86,4 +86,5 @@ You only click Create Snapshot → Copy Snapshot → Create Volume
 | sc1 (Cold HDD)                   | HDD          | Backup, archive, rarely used data            | Slow                                | Very Low   | Cheapest option for infrequent access.                 |
 | Magnetic (Old Type)              | HDD          | Legacy systems only                          | Very Slow                           | Low        | Old generation, rarely used now.                       |
 
+
 ```
