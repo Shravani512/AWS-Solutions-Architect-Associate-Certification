@@ -109,13 +109,13 @@ On those servers AWS installs a Hypervisor (virtualization software)
 Hypervisor divides one big physical server into many virtual machines
 When we run EC2 instance aws allocates any free virtual machine(host) on which EC2 instance runs.
 
-1. * **When Reboot EC2**
+* ***When Reboot EC2***
      
 AWS keeps you on same physical server
 Just restarts the OS
 Instance Store data stays
 
-2. * **Stop → Start EC2**
+* ***Stop → Start EC2***
 
 AWS may:
 Free that physical server
