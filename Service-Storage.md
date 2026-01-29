@@ -121,7 +121,7 @@ Move your EC2 to another free server
 New hardware = New Host
 Instance Store disk was attached to old server → Data Lost
 
-### EFS
+## EFS
 
 Amazon EFS is a fully managed, scalable network file storage service that allows multiple Linux EC2 instances to access the same file system simultaneously using NFS. 
 Multiple EC2 servers can open the same storage at the same time
@@ -163,7 +163,7 @@ Run mount command  (sudo mount .efs efs:id /directory) (id=file syatem id, direc
 Folder appears like normal disk
 Start using it like /mnt/data
 
-### FSx
+## FSx
 
 Amazon FSx is a fully managed file storage service in AWS.
 It provides high-performance shared file systems where AWS manages servers, patches, backups, scaling, and maintenance, so we don’t have to manage file servers manually.
@@ -173,12 +173,12 @@ It is different from EFS because FSx supports both Windows and Linux environment
 
 ```
 
-| FSx Type                        | Best For                   | Supported OS          | Protocols       | Key Features                                           | Example Use Case                                     |
-| ------------------------------- | -------------------------- | --------------------- | --------------- | ------------------------------------------------------ | ---------------------------------------------------- |
-| **FSx for Windows File Server** | Windows Applications       | Windows               | SMB             | Active Directory integration, quotas, deduplication    | Company shared drive, .NET apps, Windows file server |
-| **FSx for Lustre**              | High-Performance Computing | Linux                 | Lustre          | Very low latency, very high throughput, S3 integration | Machine Learning, Big Data, Scientific research      |
-| **FSx for NetApp ONTAP**        | Enterprise Storage         | Windows, Linux, macOS | NFS, SMB, iSCSI | Snapshots, cloning, replication, scalable              | Large corporate storage, ERP systems                 |
-| **FSx for OpenZFS**             | Advanced File Management   | Linux, Windows, macOS | NFS             | Compression, snapshots, cloning, cost-effective        | Dev/Test environments, analytics workloads           |
+| FSx Type                      | Best For                   | Supported OS          | Protocols       | Key Features                                           | Example Use Case                                     |
+| ------------------------------- | -------------------------- | --------------------- | --------------- | ------------------------------------------------------ | ---------------------------------------------------|
+| FSx for Windows File Server | Windows Applications       | Windows               | SMB             | Active Directory integration, quotas, deduplication    | Company shared drive, .NET apps, Windows file server |
+| FSx for Lustre              | High-Performance Computing | Linux                 | Lustre          | Very low latency, very high throughput, S3 integration | Machine Learning, Big Data, Scientific research      |
+| FSx for NetApp ONTAP        | Enterprise Storage         | Windows, Linux, macOS | NFS, SMB, iSCSI | Snapshots, cloning, replication, scalable              | Large corporate storage, ERP systems                 |
+| FSx for OpenZFS             | Advanced File Management   | Linux, Windows, macOS | NFS             | Compression, snapshots, cloning, cost-effective        | Dev/Test environments, analytics workloads           |
 
 Windows → Office / Company Files
 Lustre → Speed / Supercomputing
@@ -194,7 +194,7 @@ FSx provides different managed file systems based on workload — Windows for Mi
 Windows, NetApp, OpenZFS → Single AZ or Multi-AZ
 Lustre → Only Single AZ
 
-### S3 Overview
+## S3 Overview
 
 Amazon S3 is a highly scalable and secure object storage service used to store unlimited files like logs, media, and backups. It organizes data into buckets and objects using a flat structure. It integrates with EC2, Lambda, and IAM, and provides high durability by replicating data across multiple availability zones. It is commonly used for static websites, media storage, and application logs, with a 5 TB max file size and globally unique bucket names.
 
