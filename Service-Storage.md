@@ -9,5 +9,6 @@ You don’t see blocks.
 You just see C Drive / D Drive.
 Same in AWS — EC2 sees one disk, but AWS internally manages blocks.
 
-> 
-> Sub-Topic Name
+> [!NOTE]
+
+
