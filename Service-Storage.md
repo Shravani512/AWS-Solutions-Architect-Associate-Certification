@@ -10,6 +10,8 @@ You just see C Drive / D Drive.
 Same in AWS — EC2 sees one disk, but AWS internally manages blocks.
 
 * **Sub-Topic Name**
-    This is your normal text that will appear right under the bold name.
+
+This text starts a new normal paragraph at the margin.
+
 
 
