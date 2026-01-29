@@ -270,4 +270,4 @@ Don’t know usage pattern → Intelligent-Tiering
 
 S3 Storage Classes help balance cost, speed, and durability — Standard for active data, IA for less frequent access, Glacier for archives, and Intelligent-Tiering when access pattern is unknown.
 
-![]()
+![](https://github.com/Shravani512/AWS-Solutions-Architect-Associate-Certification/blob/ea726d23e940a87da044013a2b976491f56925a4/Images/Storage_classes.png)
