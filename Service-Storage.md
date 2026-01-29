@@ -1,4 +1,4 @@
-### EBS
+## EBS
 
 1. **Block Storage**
   
@@ -95,3 +95,32 @@ sc → Super cheap archive
 
 ```
 ## Instance Store
+
+Instance Store is local storage that lives inside the physical server (host) where your EC2 is running. It is very fast because it is directly connected to the machine. If the EC2 instance stops or moves to another machine, all data is lost.
+EBS = External Hard Drive (safe, detachable)
+Instance Store = Laptop’s internal temporary disk
+
+* **How our EC2 Instance runs**
+
+AWS is huge physical data centers + servers + networking + storage.
+
+AWS have physical hardware servers
+On those servers AWS installs a Hypervisor (virtualization software)
+Hypervisor divides one big physical server into many virtual machines
+When we run EC2 instance aws allocates any free virtual machine(host) on which EC2 instance runs.
+
+1. * **When Reboot EC2**
+     
+AWS keeps you on same physical server
+Just restarts the OS
+Instance Store data stays
+
+2. * **Stop → Start EC2**
+
+AWS may:
+Free that physical server
+Move your EC2 to another free server
+New hardware = New Host
+Instance Store disk was attached to old server → Data Lost
+
+
