@@ -1,5 +1,5 @@
 ### EBS
-* **Block Storage**
+
 Amazon EBS is a block-level storage service for EC2 instances that provides a virtual hard disk in the cloud.
 You can create a volume of fixed size, attach it to an EC2 instance, mount it, detach and reattach it anytime without losing data.
 Internally, AWS stores data in small blocks for high speed and reliability, but to the user it appears as a single disk drive.
