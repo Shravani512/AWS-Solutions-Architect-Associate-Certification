@@ -43,3 +43,21 @@ Then we enable versioning and see that every upload creates a new version ID, so
 We also learn about delete markers, suspending versioning, and MFA delete, which show how S3 manages file history and adds extra security. Overall, the demo teaches how versioning helps in data backup,
 recovery, and safe file management in S3.
 
+## S3 ACL and Resource Policies Demo
+
+In this demo we are learning how to control access to an S3 bucket using Resource (Bucket) Policies instead of only IAM policies. We create a bucket with one user and then test how different users—same account, different account, and public users—can or cannot access files based on permissions.
+We then apply folder-level permissions (GET, DELETE, LIST) through bucket policies to allow specific actions only on selected folders like logs, traces, or media. Overall, the demo shows how S3 Resource Policies help in fine-grained access control, cross-account sharing, and secure public access management.
+
+## S3 Static website hosting
+
+In this demo we are hosting a static website using Amazon S3 instead of a traditional web server. We upload HTML, CSS, images, and a custom 404 page into an S3 bucket and enable Static Website Hosting so S3 can serve these files like a website.
+Then we configure public read permissions using bucket policy and public access settings, allowing anyone on the internet to open the site through the S3 website endpoint. Overall, this shows how S3 can act as a low-cost, scalable hosting solution for static websites without needing EC2 or servers.
+
+## S3 Pres Signed URLs Demo
+
+In this demo we are sharing a private S3 file securely using a Pre-Signed URL instead of making the bucket public. The bucket remains private, but we generate a temporary link that allows anyone with the URL to access the file only for a limited time.
+It also shows that the URL works only with the permissions of the user who created it. If the user does not have GetObject permission, the pre-signed URL will also fail. This demonstrates controlled, time-based and secure file sharing in S3 without exposing data permanently.
+
+## S3 Access Points Demo
+In this demo we are using S3 Access Points to give different users separate and controlled entry points to the same bucket instead of managing one big bucket policy. Each access point acts like a custom gateway with its own permissions for a specific team (developers, finance, etc.).
+This allows fine-grained access control without changing the main bucket settings again and again. The bucket stores data centrally, while access points handle who can read, upload, or modify objects, making large-scale permission management easier and more secure.
