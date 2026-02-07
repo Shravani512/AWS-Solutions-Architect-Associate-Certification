@@ -61,3 +61,5 @@ It also shows that the URL works only with the permissions of the user who creat
 ## S3 Access Points Demo
 In this demo we are using S3 Access Points to give different users separate and controlled entry points to the same bucket instead of managing one big bucket policy. Each access point acts like a custom gateway with its own permissions for a specific team (developers, finance, etc.).
 This allows fine-grained access control without changing the main bucket settings again and again. The bucket stores data centrally, while access points handle who can read, upload, or modify objects, making large-scale permission management easier and more secure.
+
+Hello guys!
