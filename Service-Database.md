@@ -319,3 +319,74 @@ One-line mental model
 
 Provisioned Redshift = fixed analytics factory
 Redshift Serverless = analytics on demand
+
+## Amazon DynamoDB
+
+Amazon DynamoDB is a fully managed, serverless NoSQL database provided by AWS, designed for applications that require very low latency, massive scale, and high availability without managing servers or capacity.
+
+Unlike traditional relational databases, DynamoDB does not use fixed schemas, joins, or complex transactions across tables. Instead, it stores data as items identified by a primary key, allowing each item to have a flexible structure. AWS automatically handles scaling, partitioning, replication, and fault tolerance, making DynamoDB ideal for unpredictable and high-traffic workloads.
+
+**Why is was needed**
+DynamoDB was built because traditional SQL databases can’t easily handle sudden traffic spikes and millions of users at the same time. It removes servers and manual scaling, so it stays fast and available automatically.
+
+It stores data as key-value or documents with a primary key, avoids joins, and spreads data automatically—this is why reads and writes stay very fast even under heavy load.
+
+**Scenario Example**: E-commerce Cart System
+
+Imagine an e-commerce website during a flash sale.
+Millions of users add/remove items from carts at the same time
+Each cart needs instant read/write access
+Traffic is unpredictable
+Data structure varies per user
+
+Using DynamoDB:
+Each userId is the partition key
+Each cart item is stored as a nested document
+DynamoDB auto-scales to handle traffic spikes
+Latency stays consistently low
+No downtime or manual scaling required
+
+This would be difficult and expensive to manage with a traditional SQL database.
+
+**One-Line Memory Trick**
+
+SQL = relationships and structure
+DynamoDB = scale, speed, and simplicity
+
+## DynamoDB Accelerator (DAX)
+
+DAX acts as a super-fast in-memory layer that sits between your application and DynamoDB.
+When your application needs to read data, it first asks DAX instead of going directly to DynamoDB. If the requested data is already stored in DAX’s memory, it is returned almost instantly (in microseconds). If the data is not present, DAX fetches it from DynamoDB, returns it to the application, and stores a copy in memory so that future requests for the same data are served much faster.
+
+Because of this, repeated read requests do not hit DynamoDB again and again, which reduces latency, lowers DynamoDB load, and improves overall application performance.
+
+App asks for data
+DAX checks memory
+If data found → returns in microseconds
+If not found → gets from DynamoDB, stores it, then returns
+Next time → super fast response 
+
+## OpenSearch
+
+OpenSearch is a fast search and analytics engine that helps you store, search, and analyze large amounts of data like logs, text, events, JSON, and time-based data — in real time.
+It is not a normal database; it is built mainly for searching and analyzing data quickly.
+
+**- OpenSearch works in 4 simple stages:**
+
+Data comes in
+Data gets indexed (prepared for fast search)
+Data is stored in a cluster
+You search, filter, and analyze it instantly
+
+**How OpenSearch works-**
+1. Data Ingestion-
+Applications, EC2, or Lambda send logs, events, or JSON data to OpenSearch through ingestion pipelines or APIs.
+2. Indexing-
+OpenSearch processes the incoming data, breaks text into searchable terms, and creates indexes for fast searching.
+3. Storage in Cluster-
+Data is stored across multiple nodes as shards and replicas, enabling scalability, fault tolerance, and parallel access.
+4. Search & Analytics-
+Search queries and aggregations run on indexes (not raw data), returning results and insights in milliseconds.
+
+OpenSearch = ingest data → index it → store it → search & analyze fast
+
