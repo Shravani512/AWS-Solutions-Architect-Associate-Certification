@@ -390,3 +390,114 @@ Search queries and aggregations run on indexes (not raw data), returning results
 
 OpenSearch = ingest data → index it → store it → search & analyze fast
 
+## Elastic Catche
+
+ElastiCache is a super-fast in-memory cache that sits between your application and database to speed up data retrieval and reduce load on your database.
+Databases can get slow under heavy traffic.
+ElastiCache keeps frequently accessed data in memory so apps get it instantly.
+Reduces latency (response time) and helps apps scale easily.
+
+**How it works-**
+App requests data → first check ElastiCache
+Cache hit: Data returned instantly from memory
+Cache miss: Fetch from database → store in cache for next time
+
+**Memory Trick**
+DAX = “Super-fast RAM just for DynamoDB”
+ElastiCache = “Super-fast RAM for any database or app”
+
+**- Example**
+* DAX: You have a DynamoDB table of user profiles → reading a profile now happens in microseconds.
+* ElastiCache: You store session tokens, leaderboard scores, or frequently queried RDS rows → retrieved instantly from memory.
+
+**MemoryDB For Redis**
+
+MemoryDB is a fully managed, in-memory Redis database that can serve both as a cache and as a primary database.
+Unlike ElastiCache (which is mainly a cache), MemoryDB can store all your data in memory with high durability, scalability, and ultra-fast performance.
+
+Redis = super-fast memory engine for storing & retrieving data
+
+**Key Features**
+
+- Microsecond reads & low-millisecond writes
+- Primary + replica nodes for high availability
+- Shards for horizontal scaling (distribute data & load)
+- Multi-AZ transactional logs for durability & recovery
+- Enterprise-grade security (ACLs, subnet groups, parameter groups)
+
+## Amazon DocumentDB
+
+Type: Document database
+
+Description: Amazon DocumentDB is a fully managed database service designed to store JSON-like, semi-structured documents. It allows developers to work with data that does not fit into rigid relational tables, supporting flexible and evolving schemas.
+
+Key Features:
+- MongoDB-compatible APIs, so applications built for MongoDB can work with minimal changes.
+- Supports indexing, querying, and aggregating JSON documents efficiently.
+- Fully managed, automatically scales storage, handles backups, and ensures high availability.
+
+Use Cases: Content management, catalogs, user profiles, product metadata, and applications where data structure can evolve over time.
+
+## Amazon Keyspaces
+
+Type: Wide-column (NoSQL) database
+
+Description: Amazon Keyspaces is a fully managed Apache Cassandra-compatible database. It is designed for workloads that require high availability, massive scalability, and low-latency access to large volumes of structured data. Data is stored in tables with partition keys and clustering columns, allowing efficient organization and retrieval.
+
+Key Features:
+- Compatible with Cassandra Query Language (CQL).
+- Auto-scaling to handle large, high-traffic workloads.
+- Serverless option allows automatic capacity management.
+
+Use Cases: IoT applications, telemetry data, real-time analytics, and large-scale, distributed systems that require horizontal scalability.
+
+## Amazon Neptune
+
+Type: Graph database
+
+Description: Amazon Neptune is a fully managed graph database optimized for storing relationships between data points. It supports both Property Graph (Gremlin) and RDF/ SPARQL models, allowing flexible representation of complex networks.
+
+Key Features:
+- Optimized for graph queries, providing fast traversal of relationships.
+- High availability across multiple Availability Zones.
+- Integrated with other AWS services for analytics and security.
+
+Use Cases: Social networks, recommendation engines, fraud detection, knowledge graphs, and network or relationship analysis.
+
+## Amazon QLDB (Quantum Ledger Database)
+
+Type: Ledger database
+
+Description: Amazon QLDB is a fully managed ledger database that provides a complete, immutable, and cryptographically verifiable history of all changes to your data. It guarantees that all changes are permanent and auditable, making it ideal for applications that require data integrity and trust.
+
+Key Features:
+- Immutable transaction log that cannot be altered.
+- Cryptographic verification ensures data integrity.
+- Serverless, fully managed, and highly durable.
+
+Use Cases: Financial systems, supply chain management, insurance, auditing, and any application that requires a trustable, tamper-proof record of transactions.
+
+## Amazon Timestream
+
+Type: Time-series database
+
+Description: Amazon Timestream is a fully managed time-series database designed to handle high-volume, time-stamped data from IoT devices, applications, and logs. It automatically stores recent data in memory for fast access and moves older data to cost-efficient storage, optimizing performance and cost.
+
+Key Features:
+- Fast ingestion and querying of large time-series datasets.
+- Built-in data lifecycle management and automated tiering.
+- Supports SQL-like queries tailored for time-series operations.
+
+Use Cases: IoT telemetry, application monitoring, metrics collection, operational dashboards, and predictive analytics based on trends over time.
+
+## Summary
+
+- RDS / Aurora → Relational, structured, SQL
+- Redshift → Data warehouse, analytics
+- DynamoDB / DAX → NoSQL key-value, microsecond reads with DAX
+- OpenSearch → Search & analytics
+- ElastiCache / MemoryDB → In-memory cache, Redis features
+- DocumentDB / Keyspaces → NoSQL (document / wide-column)
+- Neptune → Graph relationships
+- QLDB → Ledger, immutable transactions
+- Timestream → Time-series data
