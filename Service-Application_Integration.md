@@ -473,3 +473,38 @@ It automates complex data workflows without managing Airflow servers, using code
 **- SWF = long human-involved workflows**
 **- Airflow (MWAA) = scheduled data pipelines**
 
+## Design: Scalable AWS Application using Application Integration Services
+Problem statement 
+
+Design a highly scalable web application (like an e-commerce or booking app) that can handle traffic spikes, background processing, notifications, and failures.
+
+**Answer**
+**High-Level Architecture Flow**
+
+A user sends a request from a web or mobile app which first reaches API Gateway (secure front door). API Gateway forwards the request to an Application Load Balancer (ELB), which distributes traffic across multiple EC2 instances. Auto Scaling increases or decreases EC2 servers based on load to handle traffic spikes.
+
+For time-consuming tasks (order processing, payment, image processing), the app pushes messages to SQS, so the system stays responsive. SNS sends notifications to multiple services at once (email, SMS, Lambda). EventBridge captures business events like order placed and routes them to the right consumers.
+
+Step Functions orchestrates complex workflows like payment → inventory → shipping → notification. SES sends emails such as OTPs and invoices. AppFlow syncs data with SaaS apps (CRM, Salesforce). Managed Apache Airflow (MWAA) runs scheduled jobs like daily reports. Amazon MQ is used only if legacy systems need JMS/AMQP messaging.
+
+**timeline-style explanation** 
+
+T0 – User clicks action in web/mobile app
+
+T1 – Request enters API Gateway (auth, throttling)
+
+T2 – ALB forwards request to a healthy EC2
+
+T3 – Auto Scaling adds/removes EC2 based on load
+
+T4 – Application code runs on EC2
+
+T5 – Heavy work sent to SQS / Amazon MQ
+
+T6 – Multi-step logic handled by Step Functions / SWF
+
+T7 – Business events routed via EventBridge
+
+T8 – Notifications sent using SNS → SES
+
+T9 – Data sync & batch jobs via AppFlow / MWAA (Airflow)
