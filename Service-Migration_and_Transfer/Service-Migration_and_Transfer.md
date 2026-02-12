@@ -243,44 +243,44 @@ Think of AWS Transfer Family as AWS giving you a fully managed, secure FTP serve
 
 It supports Amazon S3 and Amazon EFS as storage targets and works with standard protocols like SFTP, FTPS, FTP, and AS2, making it easy to migrate or integrate legacy systems with AWS
 
-**How it’s different from DataSync**
+**• How it’s different from DataSync**
 
 While DataSync is mainly used for bulk data migration, AWS Transfer Family is designed for ongoing file exchange. It behaves like a traditional FTP server but is highly available, scalable, and secure by default, with no servers for you to manage.
 
-**How it works**
+**• How it works**
 
 You create a Transfer Family server, and AWS provides a public endpoint so external users or partners can upload or download files. If access needs to be restricted, the server can be placed inside a VPC using a VPC endpoint.
 
 When users transfer files, they are directly stored in S3 or EFS. AWS also integrates with CloudWatch, giving visibility into transfers, errors, and activity logs.
 
-**SFTP Connector Integration**
+**• SFTP Connector Integration**
 
 AWS Transfer Family also includes an SFTP Connector, which allows AWS to securely pull or push files from external SFTP servers (on-premises or cloud). This helps merge external data with AWS-based analytics, reporting, or data lake workloads without manual intervention.
 
-**Conclusion**
+**• Conclusion**
 
 AWS Transfer Family simplifies secure file transfer by providing a fully managed FTP/SFTP/FTPS/AS2 service that connects directly to S3 and EFS. It’s ideal for businesses that rely on continuous file exchange and want AWS to handle availability, security, and scalability.
 
-**AWS DataSync**
+**• AWS DataSync**
 
 AWS DataSync is a managed data transfer service that helps organizations move large amounts of data quickly and securely between on-premises storage and AWS storage services. Instead of building custom scripts or managing complex tools, DataSync automates the entire migration and synchronization process.
 
 It is commonly used when companies want to migrate, replicate, or continuously sync data to AWS services like Amazon S3, EFS, or FSx.
 
-**How DataSync Works**
+**• How DataSync Works**
 
 DataSync works using four simple building blocks. First, a DataSync Agent is deployed close to the data source (on-premises or cloud). This agent reads data from the storage system and communicates with AWS DataSync.
 
 Next, you define Locations, which represent the source and destination of the data—such as an on-premises NFS server and an S3 bucket. Then, you create a Task, which acts like a blueprint describing how the data should be transferred. Every time you run this blueprint, it becomes a Task Execution, showing real-time progress and results.
 
-**Task Execution Lifecycle**
+**• Task Execution Lifecycle**
 
 When a task runs, it moves through clear stages: it may wait in queued state, then launch, prepare by identifying which files need copying, transfer the data, and finally verify the integrity of the copied files. This structured flow makes the transfer reliable and easy to monitor.
 
-**Key Capabilities**
+**• Key Capabilities**
 
 DataSync is optimized for high-speed transfers, supports NFS, SMB, and S3, performs incremental copies, encrypts data during transfer, and provides detailed CloudWatch monitoring and logs. It also supports automation and scheduling, making it suitable for recurring data sync jobs.
 
-**Common Use Cases**
+**• Common Use Cases**
 
 Organizations use AWS DataSync to migrate data from on-premises environments to AWS, synchronize data across AWS regions for disaster recovery, or move data from other cloud providers like Azure or GCP into AWS.
